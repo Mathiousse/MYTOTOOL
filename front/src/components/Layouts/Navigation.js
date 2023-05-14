@@ -18,26 +18,21 @@ const Navigation = ({ user }) => {
     const [open, setOpen] = useState(false)
 
     return (
-        <nav className="bg-white border-b border-gray-100">
+        <nav className="mx-auto px-24 py-3 bg-pink w-90 m-auto mt-10 mb-10 rounded-2xl shadow-based">
             {/* Primary Navigation Menu */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="">
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         {/* Logo */}
                         <div className="flex-shrink-0 flex items-center">
-                            <Link href="/dashboard">
-                                <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
+                            <Link href="/">
+                                {/* <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" /> */}
+                                <h2 className='text-white font-extrabold text-3xl font-sans'>MYTOTOOL</h2>
                             </Link>
                         </div>
 
                         {/* Navigation Links */}
-                        <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <NavLink
-                                href="/dashboard"
-                                active={router.pathname === '/dashboard'}>
-                                Dashboard
-                            </NavLink>
-                        </div>
+
                     </div>
 
                     {/* Settings Dropdown */}
@@ -46,7 +41,7 @@ const Navigation = ({ user }) => {
                             align="right"
                             width="48"
                             trigger={
-                                <button className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
+                                <button className="flex items-center font-semibold text-white text-xl focus:outline-none transition duration-150 ease-in-out">
                                     <div>{user?.name}</div>
 
                                     <div className="ml-1">
@@ -65,7 +60,7 @@ const Navigation = ({ user }) => {
                             }>
                             {/* Authentication */}
                             <DropdownButton onClick={logout}>
-                                Logout
+                                Se déconnecter
                             </DropdownButton>
                         </Dropdown>
                     </div>
@@ -107,11 +102,6 @@ const Navigation = ({ user }) => {
             {open && (
                 <div className="block sm:hidden">
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/dashboard"
-                            active={router.pathname === '/dashboard'}>
-                            Dashboard
-                        </ResponsiveNavLink>
                     </div>
 
                     {/* Responsive Settings Options */}

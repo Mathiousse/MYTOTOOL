@@ -6,8 +6,18 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                pink: "#f08080",
+                pinkbg: "#ffc0cb",
+            },
+            width: {
+                '90': "90%",
+            },
+            boxShadow: {
+                'based': "0px 3px 10px rgba(0, 0, 0, 0.2);",
+            }
         },
     },
     variants: {

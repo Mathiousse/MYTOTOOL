@@ -1,22 +1,34 @@
-export default function handler(req, res) {
+import axios from "axios";
+
+const apiClient = axios.create({
+    baseURL: 'http://localhost:8000/api',
+    withCredentials: true,
+});
+
+export default async function handler(req, res) {
     // Get data submitted in request's body.
     const body = req.body
     const task = body.data.task
-    console.log(body)
 
     // Guard clause checks for task,
     // and returns early if is not not found
-    if (!body.task) {
+    if (!task) {
         // Sends a HTTP bad request error code
         return res.status(400).json({ data: 'Task not found' })
     }
+    const csrf = () => axios.get('/sanctum/csrf-cookie')
 
     switch (body.action) {
         case 'addTask':
-            addTask(task)
+            await csrf()
+            apiClient.post('/tasks', task)
+                .then(response => console.log(response))
+                .catch(error => console.error(error));
+            // return res.status(400).json({ data: 'Prankexx' })
             break;
 
         default:
+            return res.status(400).json({ data: 'Could not find the action' })
             break;
     }
 
@@ -35,8 +47,4 @@ export default function handler(req, res) {
     //             resolve();
     //         });
     // });
-}
-
-async function addTask(task) {
-
 }

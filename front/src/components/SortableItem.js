@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import Check from "./check";
+import Check from "./Check";
 
 async function deleteTask(event) {
     console.log("loll")
@@ -34,10 +34,10 @@ export function SortableItem(props) {
         transition
     }
     return (
-        <div className="task" ref={setNodeRef} style={style} {...attributes} {...listeners} >
+        <div className="task relative flex items-center gap-5 p-4 hover:shadow-md hover:transition duration-200 ease-in-out" ref={setNodeRef} style={style} {...attributes} {...listeners} >
             <Check />
-            <p>{props.id[1]}</p>
-            <img className="delete-task" data-id={props.id[0]} onClick={deleteTask} src="../delete.svg" alt="Supprimer la tâche" />
+            <p className="font-sans m-0 text-base flex-grow">{props.id[1]}</p>
+            <img className="w-8 cursor-pointer flex-shrink-0" data-id={props.id[0]} onClick={deleteTask} src="../delete.svg" alt="Supprimer la tâche" />
         </div>
     )
 }

@@ -1,40 +1,17 @@
-import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas';
+export default function Check({ completed }) {
 
-function completeTask(e) {
-    console.log(e.target.parentElement.querySelector("Lottie"))
-}
-
-
-export default function Check({ done }) {
-    const { rive, RiveComponent } = useRive({
-        src: '../checkmark.riv',
-        autoplay: true,
-        stateMachines: "based",
-        layout: new Layout({
-            fit: Fit.Fill,
-            alignment: Alignment.TopCenter,
-        }),
-    });
-    if (done) {
-        return (
-            <div className="done circle-container">
-                <button onClick={completeTask} className="circle">
-                    <div className="check">
-                        <RiveComponent />
-                    </div>
-                </button>
-            </div>
-        )
+    function completeTask(e) {
+        console.log(e.target)
+        // Toggle the animate-spin class on click
+        e.target.classList.toggle("animate-spin")
+        e.target.classList.toggle("bg-green-500")
+        e.target.classList.toggle("border-green-500")
     }
-    else {
-        return (
-            <div className="circle-container">
-                <button onClick={completeTask} className="circle">
-                    <div className="check">
-                        <RiveComponent className="animation" />
-                    </div>
-                </button>
-            </div>
-        )
-    }
+
+    return (
+        <div className={completed ? "done" : "" + " completed circle-container relative flex-shrink-0 h-6 self-center"}>
+            <button onClick={completeTask} className="circle border-gray-500  border-2 w-6 h-6 rounded-full cursor-pointer transition-colors duration-300 animate-150 ease-in-out">
+            </button>
+        </div>
+    )
 }

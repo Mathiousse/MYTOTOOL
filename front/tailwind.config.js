@@ -11,6 +11,7 @@ module.exports = {
             colors: {
                 pink: "#f08080",
                 pinkbg: "#ffc0cb",
+                'custom-green': '#39b54a',
             },
             width: {
                 '90': "90%",
@@ -23,7 +24,9 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+
         },
+        animation: ['responsive', 'motion-safe', 'motion-reduce'],
     },
     plugins: [require('@tailwindcss/forms')],
 }

@@ -1,7 +1,6 @@
 import { closestCenter, DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core"
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { SortableItem } from "./SortableItem"
-import Check from "./check"
 import { useState } from "react"
 
 

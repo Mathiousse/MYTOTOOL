@@ -59,6 +59,24 @@ export default function SortableItem(props) {
         transition
     } = useSortable({ id: props.id[0] })
 
+    const htmlToText = (html) => {
+        html = html.replace(/<(?!br\s*\/?)[^>]+>/g, "");
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        return temp.textContent;
+    }
+
+    const textToHtml = (text) => {
+        text = text.replace(/\\n/g, "<br>");
+        return text;
+    }
+
+    const editContentEditable = (html) => {
+        const text = htmlToText(html);
+        const newHtml = textToHtml(text);
+        return newHtml
+    };
+
     const style = {
         transform: CSS.Transform.toString(transform),
         transition
@@ -72,7 +90,7 @@ export default function SortableItem(props) {
                         <ContentEditable
                             data-id={props.id[0]}
                             html={taskText}
-                            onChange={(e) => setTaskText(e.target.value)}
+                            onChange={(e) => setTaskText(editContentEditable(e.target.value))}
                             className="taskTextActive taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow break-all whitespace-normal"
                         />
                         <img

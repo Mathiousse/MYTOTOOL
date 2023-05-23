@@ -24,6 +24,7 @@
         "@dnd-kit/sortable": "^7.0.2",
         "@dnd-kit/utilities": "^3.2.1",
         "@inertiajs/inertia": "^0.11.1",
+        "flowbite": "^1.6.5",
         "react-contenteditable": "^3.3.7"
     }
 }

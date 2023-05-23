@@ -6,48 +6,46 @@ import React, { useState, useRef, useEffect } from "react";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import useReset from "@/hooks/useReset";
 import ContentEditable from "react-contenteditable";
+import { router } from '@inertiajs/react'
+
 
 export default function SortableItem(props) {
 
     const [isEditing, setIsEditing] = useState(false);
     const divRef = useRef(null);
-    const [taskText, setTaskText, resetTaskText] = useReset(props.id[1]);
-
+    const [taskText, setTaskText] = useState(props.id[1]);
 
     const deleteTask = (e) => {
         if (confirm("Êtes vous sûrs de vouloir supprimer cette tâche ?")) {
             Inertia.delete(route("task.destroy", props.id[0]));
         }
+        router.reload({ only: ['tasks'] })
     }
-
+    const [taskTextPrev, setTaskTextPrev] = useState('')
     const editTask = (e) => {
         setIsEditing(true);
-
+        if (taskTextPrev === '') setTaskTextPrev(taskText)
+        const p = e.target.parentElement.querySelector(".taskText")
+        const range = document.createRange();
+        range.setStart(p, p.childNodes.length);
+        range.setEnd(p, p.childNodes.length);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        p.focus();
     }
 
     const confirmEdit = (e) => {
         setIsEditing(false);
         Inertia.put(route("task.update", props.id[0]), { data: { text: taskText } });
+        router.reload({ only: ['tasks'] })
     }
 
     const cancelEdit = (e) => {
         setIsEditing(false);
-        resetTaskText();
+        setTaskText(props.id[1])
+        // fonction refresh qui refresh le component / la page 
     }
-
-    useEffect((e) => {
-        const p = document.querySelector(".taskTextActive")
-        if (p) {
-            const range = document.createRange();
-            range.setStart(p, p.childNodes.length);
-            range.setEnd(p, p.childNodes.length);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            p.focus();
-        }
-
-    }, [isEditing]);
 
     useOutsideClick(divRef, cancelEdit)
 
@@ -59,77 +57,56 @@ export default function SortableItem(props) {
         transition
     } = useSortable({ id: props.id[0] })
 
-    const htmlToText = (html) => {
-        html = html.replace(/<(?!br\s*\/?)[^>]+>/g, "");
-        const temp = document.createElement('div');
-        temp.innerHTML = html;
-        return temp.textContent;
-    }
-
-    const textToHtml = (text) => {
-        text = text.replace(/\\n/g, "<br>");
-        return text;
-    }
-
-    const editContentEditable = (html) => {
-        const text = htmlToText(html);
-        const newHtml = textToHtml(text);
-        return newHtml
-    };
-
     const style = {
         transform: CSS.Transform.toString(transform),
         transition
     }
     return (
-        <div>
-            {
-                isEditing ? (
-                    <div ref={divRef} className={(isEditing ? "border-4 border-pinkbg" : "") + " task relative flex items-center gap-5 p-4 hover:shadow-md hover:transition duration-200 ease-in-out rounded-2xl"} >
-                        <Check />
-                        <ContentEditable
-                            data-id={props.id[0]}
-                            html={taskText}
-                            onChange={(e) => setTaskText(editContentEditable(e.target.value))}
-                            className="taskTextActive taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow break-all whitespace-normal"
-                        />
-                        <img
-                            className="w-8 h-8 cursor-pointer flex-shrink-0"
-                            data-id={props.id[0]}
-                            onClick={confirmEdit}
-                            src="../confirm.svg"
-                            alt="Confirmer la modification"
-                        />
-                        <img
-                            className="w-8 h-8 cursor-pointer flex-shrink-0"
-                            data-id={props.id[0]}
-                            onClick={cancelEdit}
-                            src="../cancel.svg"
-                            alt="Annuler la modification"
-                        />
-                    </div >
-                ) : (
-                    <div ref={divRef} className={(isEditing ? "border-4 border-pinkbg" : "") + " task relative flex items-center gap-5 p-4 hover:shadow-md hover:transition duration-200 ease-in-out rounded-2xl"}>
+        <div ref={divRef} className={(isEditing ? "border-4 border-pinkbg" : "") + " task relative flex items-center gap-5 p-4 hover:shadow-md hover:transition duration-200 ease-in-out rounded-2xl"}>
+            <Check />
+            <ContentEditable
+                disabled={!isEditing}
+                data-id={props.id[0]}
+                html={taskText}
+                onChange={(e) => setTaskText(e.target.value)}
+                className="taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow"
+            />
+            {isEditing ? (
+                <>
+                    <img
+                        className="w-8 h-8 cursor-pointer flex-shrink-0"
+                        data-id={props.id[0]}
+                        onClick={confirmEdit}
+                        src="../confirm.svg"
+                        alt="Confirmer la modification"
+                    />
+                    <img
+                        className="w-8 h-8 cursor-pointer flex-shrink-0"
+                        data-id={props.id[0]}
+                        onClick={cancelEdit}
+                        src="../cancel.svg"
+                        alt="Annuler la modification"
+                    />
 
-                        <Check />
-                        <p data-id={props.id[0]} className="taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow break-all whitespace-normal">{taskText}</p>
-                        <img
-                            className="w-8 h-8 cursor-pointer flex-shrink-0"
-                            data-id={props.id[0]}
-                            onClick={editTask}
-                            src="../edit.svg"
-                            alt="Éditer la tâche"
-                        />
-                        <img
-                            className="w-8 h-8 cursor-pointer flex-shrink-0"
-                            data-id={props.id[0]}
-                            onClick={deleteTask}
-                            src="../delete.svg"
-                            alt="Supprimer la tâche"
-                        />
-                    </div>
-                )}
-        </div >
+                </>
+            ) : (
+                <>
+                    <img
+                        className="w-8 h-8 cursor-pointer flex-shrink-0"
+                        data-id={props.id[0]}
+                        onClick={editTask}
+                        src="../edit.svg"
+                        alt="Éditer la tâche"
+                    />
+                    <img
+                        className="w-8 h-8 cursor-pointer flex-shrink-0"
+                        data-id={props.id[0]}
+                        onClick={deleteTask}
+                        src="../delete.svg"
+                        alt="Supprimer la tâche"
+                    />
+                </>
+            )}
+        </div>
     );
 }
-

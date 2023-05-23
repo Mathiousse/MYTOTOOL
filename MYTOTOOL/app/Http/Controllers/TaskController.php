@@ -75,6 +75,8 @@ class TaskController extends Controller
     $data = $request->input('data');
 
     $task->update($data);
+
+    return redirect()->route('task.index')->with('success', 'Tâche mise à jour');
     }
 
 

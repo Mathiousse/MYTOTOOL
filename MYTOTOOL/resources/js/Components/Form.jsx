@@ -27,6 +27,7 @@ export default function Form() {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             e.target.parentElement.querySelector("button").click();
+            e.target.value = ""
         }
     }
 

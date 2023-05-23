@@ -5,6 +5,8 @@ import SortableItem from "./SortableItem"
 
 
 export default function TasksCompleted({ tasks }) {
+    tasks = tasks.filter((item) => item.completed === 1)
+
     const tasksArray = tasks.map(({ id, text, order, completed, completionTime }) => [id, text, order, completed, completionTime]);
 
     const mouseSensor = useSensor(MouseSensor, {

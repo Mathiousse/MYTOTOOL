@@ -69,7 +69,7 @@ export default function SortableItem(props) {
                 data-id={props.id[0]}
                 html={taskText}
                 onChange={(e) => setTaskText(e.target.value)}
-                className="taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow"
+                className="taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow break-all"
             />
             {isEditing ? (
                 <>

@@ -12,6 +12,7 @@ class Task extends Model
 
     protected $fillable = [
         'text',
+        'completed'
     ];
 
     public function users(): BelongsToMany

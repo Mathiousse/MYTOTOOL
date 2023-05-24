@@ -37,7 +37,7 @@ export default function SortableItem(props) {
 
     const confirmEdit = (e) => {
         setIsEditing(false);
-        Inertia.put(route("task.update", props.id[0]), { data: { text: taskText } });
+        Inertia.put(route("task.update", props.id[0]), { text: taskText });
         router.reload({ only: ['tasks'] })
     }
 
@@ -63,7 +63,7 @@ export default function SortableItem(props) {
     }
     return (
         <div ref={divRef} className={(isEditing ? "border-4 border-pinkbg" : "") + " task relative flex items-center gap-5 p-4 hover:shadow-md hover:transition duration-200 ease-in-out rounded-2xl"}>
-            <Check />
+            <Check task={props.id} />
             <ContentEditable
                 disabled={!isEditing}
                 data-id={props.id[0]}

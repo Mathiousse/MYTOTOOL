@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class TaskController extends Controller
@@ -69,15 +70,30 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-    $task = Task::findOrFail($id);
+{
+  // log the request data
+  Log::info($request->all());
 
-    $data = $request->input('data');
+  $task = Task::findOrFail($id);
 
-    $task->update($data);
+  // log the task before updating
+  Log::info($task->toArray());
 
-    return redirect()->route('task.index')->with('success', 'Tâche mise à jour');
-    }
+  // validate the data
+  $validated = $request->validate([
+    'text' => 'sometimes|required|string|max:255',
+    'completed' => 'sometimes|required|boolean',
+  ]);
+  
+  // update the task with the validated data
+  $task->update($validated);
+
+  // log the task after updating
+  Log::info($task->toArray());
+  
+  return redirect()->route('task.index')->with('success', 'Tâche mise à jour');
+}
+
 
 
     /**

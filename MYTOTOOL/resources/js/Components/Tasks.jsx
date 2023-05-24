@@ -4,8 +4,13 @@ import { useState } from "react"
 import SortableItem from "./SortableItem"
 
 
-export default function Tasks({ tasks }) {
-    tasks = tasks.filter((item) => item.completed === 0)
+export default function Tasks({ tasks, type }) {
+    if (type === 'done') {
+        tasks = tasks.filter((item) => item.completed === 1)
+    } else {
+        tasks = tasks.filter((item) => item.completed === 0)
+    }
+
 
     const tasksArray = tasks.map(({ id, text, order, completed, completionTime }) => [id, text, order, completed, completionTime]);
 

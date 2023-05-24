@@ -35,16 +35,16 @@ export default function Dashboard({ auth, tasks }) {
         >
             <Head title="MYTOTOOL" />
             <div className=" bg-gradient-to-br from-pinkbg to-pinkbg2 py-12 w-90 m-auto mt-10 mb-10 rounded-2xl shadow-based">
-                <h2 className='font-sans text-white font-extrabold text-4xl text-center mb-10'>Vos tâches</h2>
-                <div className="ml-10 p-6 mr-10 bg-white border-b border-gray-200 font-sans rounded-2xl">
+                <div className="ml-10 p-6 pb-0 mr-10 bg-white font-sans rounded-tl-2xl rounded-tr-2xl">
                     <div className="form">
                         <Form />
                     </div>
-                    <Tasks tasks={tasks} />
+                    <Tasks type={"todo"} tasks={tasks} />
                 </div>
-                <h2 className='font-sans text-white font-extrabold text-4xl text-center mt-10'>Vos tâches terminées</h2>
-                <div className="mt-10 ml-10 p-6 mr-10 bg-white border-b border-gray-200 font-sans rounded-2xl">
-                    <TasksCompleted tasks={tasks} />
+                <div className="ml-10 p-6 pt-0 mr-10 bg-white font-sans rounded-bl-2xl rounded-br-2xl">
+                    <hr className='bg-black h-0.5 opacity-20 mx-auto'></hr>
+                    <Tasks type={"done"} tasks={tasks} />
+                    {/* <TasksCompleted tasks={tasks} /> */}
                 </div>
 
             </div>

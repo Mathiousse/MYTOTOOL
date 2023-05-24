@@ -69,7 +69,7 @@ export default function SortableItem(props) {
                 data-id={props.id[0]}
                 html={taskText}
                 onChange={(e) => setTaskText(e.target.value)}
-                className="taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow break-all"
+                className={(props.id[3] === 1 ? "line-through italic text-black opacity-60" : "") + " taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow break-all"}
             />
             {isEditing ? (
                 <>
@@ -92,7 +92,7 @@ export default function SortableItem(props) {
             ) : (
                 <>
                     <img
-                        className="w-8 h-8 cursor-pointer flex-shrink-0"
+                        className={(props.id[3] === 1 ? "hidden" : "") + " w-8 h-8 cursor-pointer flex-shrink-0"}
                         data-id={props.id[0]}
                         onClick={editTask}
                         src="../edit.svg"

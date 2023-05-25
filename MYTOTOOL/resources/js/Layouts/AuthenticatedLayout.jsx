@@ -7,6 +7,7 @@ import { Link } from '@inertiajs/react';
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const [open, setOpen] = useState(false)
 
     return (
         <div>

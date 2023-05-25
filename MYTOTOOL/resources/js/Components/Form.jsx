@@ -49,7 +49,9 @@ export default function Form() {
                     <input type="image" src="../plus.svg" border="0" alt="Submit" className="border border-green-600 rounded-full h-full w-full bg-green-600 hover:shadow-xl hover:transform hover:scale-120 hover:rounded-full active:shadow-sm active:transform active:scale-90 active:rounded-full" />
                 </button>
             </div>
-            <textarea onChange={handleChange} onKeyDown={handleKeyDown} onKeyUp={textareaSizing} className="input outline-none border-none font-montserrat text-base resize-none flex-grow" type="text" id="text" name="text" required placeholder='Entrez votre tâche ici' rows="3" cols="40"></textarea>
+            <textarea onChange={handleChange} onKeyDown={handleKeyDown} onKeyUp={textareaSizing}
+                className="input outline-none border-none font-montserrat md:text-base text-sm resize-none flex-grow"
+                type="text" id="text" name="text" required placeholder='Entrez votre tâche ici' rows="3" cols="40"></textarea>
         </form>
 
     )

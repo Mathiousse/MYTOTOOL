@@ -29,10 +29,7 @@ export default function Dashboard({ auth, tasks }) {
     }
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">MYTOTOOL</h2>}
-        >
+        <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">MYTOTOOL</h2>} >
             <Head title="MYTOTOOL" />
             <div className=" bg-gradient-to-br from-pinkbg to-pinkbg2 py-12 w-90 m-auto mt-10 mb-10 rounded-2xl shadow-based">
                 <div className="ml-10 p-6 pb-0 mr-10 bg-white font-sans rounded-tl-2xl rounded-tr-2xl">
@@ -46,8 +43,8 @@ export default function Dashboard({ auth, tasks }) {
                     <Tasks type={"done"} tasks={tasks} />
                     {/* <TasksCompleted tasks={tasks} /> */}
                 </div>
-
             </div>
+
 
             {
                 success ? (<div id="toast-target"

@@ -62,51 +62,24 @@ export default function SortableItem(props) {
         transition
     }
     return (
-        <div ref={divRef} className={(isEditing ? "border-4 border-pinkbg" : "") + " task relative flex items-center gap-5 p-4 hover:shadow-md hover:transition duration-200 ease-in-out rounded-2xl"}>
+        <div ref={divRef}
+            className={(isEditing ? "border-4 border-pinkbg" : "") + " task relative flex items-center gap-5 p-4 hover:shadow-md hover:transition duration-200 ease-in-out rounded-2xl"}>
             <Check task={props.id} />
-            <ContentEditable
-                disabled={!isEditing}
-                data-id={props.id[0]}
-                html={taskText}
-                onChange={(e) => setTaskText(e.target.value)}
-                className={(props.id[3] === 1 ? "line-through italic text-black opacity-60" : "") + " taskText focus:outline-none focus-visible:outline-none font-sans m-0 text-base flex-grow break-all"}
-            />
+            <ContentEditable disabled={!isEditing} data-id={props.id[0]} html={taskText} onChange={(e) => setTaskText(e.target.value)}
+                className={(props.id[3] === 1 ? "line-through italic text-black opacity-60" : "") +
+                    " taskText focus:outline-none focus-visible:outline-none font-sans m-0 md:text-base flex-grow break-all text-sm"} />
             {isEditing ? (
                 <>
-                    <img
-                        className="w-8 h-8 cursor-pointer flex-shrink-0"
-                        data-id={props.id[0]}
-                        onClick={confirmEdit}
-                        src="../confirm.svg"
-                        alt="Confirmer la modification"
-                    />
-                    <img
-                        className="w-8 h-8 cursor-pointer flex-shrink-0"
-                        data-id={props.id[0]}
-                        onClick={cancelEdit}
-                        src="../cancel.svg"
-                        alt="Annuler la modification"
-                    />
-
+                    <img className="md:w-8 md:h-8 w-7 h-7 cursor-pointer flex-shrink-0" data-id={props.id[0]} onClick={confirmEdit} src="../confirm.svg" alt="Confirmer la modification" />
+                    <img className="md:w-8 md:h-8 w-7 h-7 cursor-pointer flex-shrink-0" data-id={props.id[0]} onClick={cancelEdit} src="../cancel.svg" alt="Annuler la modification" />
                 </>
             ) : (
                 <>
-                    <img
-                        className={(props.id[3] === 1 ? "hidden" : "") + " w-8 h-8 cursor-pointer flex-shrink-0"}
-                        data-id={props.id[0]}
-                        onClick={editTask}
-                        src="../edit.svg"
-                        alt="Éditer la tâche"
-                    />
-                    <img
-                        className="w-8 h-8 cursor-pointer flex-shrink-0"
-                        data-id={props.id[0]}
-                        onClick={deleteTask}
-                        src="../delete.svg"
-                        alt="Supprimer la tâche"
-                    />
+                    <img className={(props.id[3] === 1 ? "hidden" : "") + " md:w-8 md:h-8 w-7 h-7 cursor-pointer flex-shrink-0"} data-id={props.id[0]} onClick={editTask} src="../edit.svg" alt="Éditer la tâche" />
+                    <img className="md:w-8 md:h-8 w-7 h-7 cursor-pointer flex-shrink-0" data-id={props.id[0]} onClick={deleteTask} src="../delete.svg" alt="Supprimer la tâche" />
                 </>
             )}
         </div>
+
     );
 }

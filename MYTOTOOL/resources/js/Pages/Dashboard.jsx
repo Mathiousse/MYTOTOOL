@@ -31,17 +31,16 @@ export default function Dashboard({ auth, tasks }) {
 
         <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">MYTOTOOL</h2>} >
             <Head title="MYTOTOOL" />
-            <div className=" bg-gradient-to-br from-pinkbg to-pinkbg2 py-12 w-90 m-auto mt-10 mb-10 rounded-2xl shadow-based">
-                <div className="ml-10 p-6 pb-0 mr-10 bg-white font-sans rounded-tl-2xl rounded-tr-2xl">
+            <div className=" bg-gradient-to-br from-pinkbg to-pinkbg2 py-12 sm:w-90 m-auto mt-10 mb-10 sm:rounded-2xl shadow-based">
+                <div className="mx-5 sm:mx-10 p-4 pb-0 bg-white font-sans rounded-tl-2xl rounded-tr-2xl">
                     <div className="form">
                         <Form />
                     </div>
                     <Tasks type={"todo"} tasks={tasks} />
                 </div>
-                <div className="ml-10 p-6 pt-0 mr-10 bg-white font-sans rounded-bl-2xl rounded-br-2xl">
+                <div className="mx-5 sm:mx-10 p-4 pb-0 bg-white font-sans rounded-bl-2xl rounded-br-2xl">
                     <hr className='bg-black h-0.5 opacity-20 mx-auto'></hr>
                     <Tasks type={"done"} tasks={tasks} />
-                    {/* <TasksCompleted tasks={tasks} /> */}
                 </div>
             </div>
 

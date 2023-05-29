@@ -11,7 +11,7 @@ export default function Authenticated({ user, header, children }) {
 
     return (
         <div>
-            <nav className="mx-auto px-24 py-3 bg-gradient-to-r from-pink2 to-pink w-90 m-auto mt-10 mb-10 rounded-2xl shadow-based">
+            <nav className="mx-auto px-24 py-3 bg-gradient-to-r from-pink2 to-pink sm:w-90 m-auto my-0 sm:my-10 sm:rounded-2xl shadow-based">
                 {/* Primary Navigation Menu */}
                 <div className="">
                     <div className="flex justify-between h-16">
@@ -68,10 +68,10 @@ export default function Authenticated({ user, header, children }) {
                         <div className="-mr-2 flex items-center sm:hidden">
                             <button
                                 onClick={() => setOpen(open => !open)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 focus:outline-2 focus:text-gray-500 transition duration-150 ease-in-out">
                                 <svg
                                     className="h-6 w-6"
-                                    stroke="currentColor"
+                                    stroke="white"
                                     fill="none"
                                     viewBox="0 0 24 24">
                                     {open ? (
@@ -109,11 +109,11 @@ export default function Authenticated({ user, header, children }) {
                                 <div className="flex items-center px-4">
                                     <div className="flex-shrink-0">
                                         <svg
-                                            className="h-10 w-10 fill-current text-gray-400"
+                                            className="h-10 w-10 fill-white text-gray-400"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
-                                            stroke="currentColor">
+                                            stroke="white">
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
@@ -124,10 +124,10 @@ export default function Authenticated({ user, header, children }) {
                                     </div>
 
                                     <div className="ml-3">
-                                        <div className="font-medium text-base text-gray-800">
+                                        <div className="font-medium text-base text-white">
                                             {user?.name}
                                         </div>
-                                        <div className="font-medium text-sm text-gray-500">
+                                        <div className="font-medium text-sm text-gray-200">
                                             {user?.email}
                                         </div>
                                     </div>
@@ -135,9 +135,9 @@ export default function Authenticated({ user, header, children }) {
 
                                 <div className="mt-3 space-y-1">
                                     {/* Authentication */}
-                                    <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                                    <ResponsiveNavLink href={route('profile.edit')}>Profil</ResponsiveNavLink>
                                     <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                        Log Out
+                                        Se déconnecter
                                     </ResponsiveNavLink>
                                 </div>
                             </div>

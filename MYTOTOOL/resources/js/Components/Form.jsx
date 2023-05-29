@@ -43,14 +43,14 @@ export default function Form() {
 
 
     return (
-        <form onSubmit={handleSubmit} className="relative flex items-center gap-5 p-4">
+        <form onSubmit={handleSubmit} className="relative flex items-center gap-1 sm:gap-5 pt-4 pb-4 sm:p-4">
             <div className="circle-container relative flex-shrink-0 self-center">
                 <button className="button circle w-6 h-6 cursor-pointer transition duration-300 ease-out" type="submit">
                     <input type="image" src="../plus.svg" border="0" alt="Submit" className="border border-green-600 rounded-full h-full w-full bg-green-600 hover:shadow-xl hover:transform hover:scale-120 hover:rounded-full active:shadow-sm active:transform active:scale-90 active:rounded-full" />
                 </button>
             </div>
             <textarea onChange={handleChange} onKeyDown={handleKeyDown} onKeyUp={textareaSizing}
-                className="input outline-none border-none font-montserrat md:text-base text-sm resize-none flex-grow"
+                className="pl-3 input outline-none border-none font-montserrat md:text-base text-sm resize-none flex-grow"
                 type="text" id="text" name="text" required placeholder='Entrez votre tâche ici' rows="3" cols="40"></textarea>
         </form>
 
